@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Reminders</title>
+<!--This is  where fonts would go-->
+    
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    
+<style type="text/css">
+    .clockStyle {
+      background-color: black;
+      border: grey 2px inset;
+      padding: 6px;
+      color: lime;
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      display: inline;
+      font-family: 'Press Start 2P', cursive;
+      margin-left: 455px;
+    }   
+    
+    h1 {
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      font-size: 40px;
+        color: darkcyan;
+    }
+    
+    h2 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 30px;
+      text-align: center;
+        color: darkcyan;
+    }
+    p {
+      font-family: Courier New;
+      margin: 25px;
+    }
+    body {
+      background-color: gainsboro;
+    }
+    div {
+      margin: 50px;
+      font-family: Courier New;
+      font-size: 20px;
+      color: indianred;
+    }
+    
+</style>    
+</head>
+<body>
+    <h1>Don't forget!</h1>
+    <p>Do you always forget to take your medication? Help is here! Now you can set up an alert to remind yourself to take your meds soon.</p>
+ 
+    <p>Set your alarm to go off - </p>    
+<!--5 radio buttons for choosing the alert--> 
+    <div>
+    <input type=radio name=rm value=no checked>No reminder
+    <input type=radio name=rm value=5000 OnClick="mytime=setTimeout('remind(10)',10000)">In 10 Seconds    
+    <input type=radio name=rm value=5000 OnClick="mytime=setTimeout('remind(60000)',60000)">In 1 minute
+    <input type=radio name=rm value=5000 OnClick="mytime=setTimeout('remind(3600000)',3600000)">In 1 hour    
+    <input type=radio name=rm value=5000 OnClick="mytime=setTimeout('remind(43200000)',43200000)">In 12 hours    
+    </div>
+        
+   <h2>What time is it?</h2>
+
+   <div id="clockDisplay" class="clockStyle"></div>        
+
+   <!--script for the radio buttons-->        
+   <script type="text/javascript"> 
+       function remind(msg1) { 
+       const msg = "Time to take your medication! This is your reminder after " + msg1 +" Seconds \nHope you feel better soon :)";
+       alert(msg); 
+       }
+   </script> 
+    
+   <!--script for the clock--> 
+   <script type="text/javascript">
+        
+    function renderTime() {
+        
+    var currentTime = new Date();
+        
+    <!--diem changes the am or pm option-->        
+    var diem = "AM";
+    var h = currentTime.getHours();
+    var m = currentTime.getMinutes();
+    var s = currentTime.getSeconds();
+
+    <!--changing to single digits eg. 16 turns to 4-->        
+        if (h == 0) {
+            h = 12;
+        } else if (h > 12) {
+            h = h - 12;
+            diem = "PM";
+        }
+        <!--adds a zero before single digits  eg. 4 turns to 04--> 
+        if (h < 10) {
+            h = "0" + h;
+        }
+        if (m < 10) {
+            m = "0" + m;
+        }
+        if (s < 10) {
+            s = "0" + s;
+        }
+        
+        
+    var myClock = document.getElementById('clockDisplay');
+        
+    myClock.textContent = h + ":" + m + ":" + s + " " + diem;   
+    setTimeout('renderTime()', 1000); 
+        
+    }  
+    <!--execute the function-->        
+    renderTime();     
+    </script>    
+        
+</body>
+</html>
